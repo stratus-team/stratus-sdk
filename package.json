@@ -1,5 +1,14 @@
 {
+  "name": "@stratus-dev/sdk",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --target es6",
+    "clean": "tsc --build --clean"
+  },
   "devDependencies": {
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "node-fetch": "^2.7.0"
   }
 }
