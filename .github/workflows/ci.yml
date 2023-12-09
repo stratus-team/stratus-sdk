@@ -15,11 +15,11 @@ jobs:
       - name: Install 
         run: npm install --frozen-lockfile
       - name: Build 
-        run: npm build
+        run: npm run build
       - name: Test 
-        run: npm test
+        run: npm run test
       - name: Lint 
-        run: npm lint
+        run: npm run lint
 
   
  
