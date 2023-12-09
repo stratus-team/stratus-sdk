@@ -14,5 +14,27 @@
   },
   "dependencies": {
     "node-fetch": "^2.7.0"
-  }
+  },
+  "description": "Typescript SDK for Stratus",
+  "version": "1.0.0",
+  "main": "./build/src",
+  "types": "./build/src/index.d.ts",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stratus-team/stratus-sdk.git"
+  },
+  "keywords": [
+    "typescript",
+    "rate",
+    "limit",
+    "sdk"
+  ],
+  "author": "Cruz Luna",
+  "bugs": {
+    "url": "https://github.com/stratus-team/stratus-sdk/issues"
+  },
+  "homepage": "https://github.com/stratus-team/stratus-sdk#readme"
 }
