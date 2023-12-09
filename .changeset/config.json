@@ -1,6 +1,11 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
-  "changelog": "@changesets/cli/changelog",
+  "changelog": [
+    "@changesets/cli/changelog",
+    {
+      "repo": "stratus-team/stratus-sdk"
+    }
+  ],
   "commit": false,
   "fixed": [],
   "linked": [],
