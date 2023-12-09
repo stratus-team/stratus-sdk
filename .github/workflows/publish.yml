@@ -16,16 +16,23 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          version: 7
-      - uses: actions/setup-node@v3
+          fetch-depth: 0
+
+      - name: Use PNPM
+        uses: pnpm/action-setup@v2.2.4
+
+      - name: Setup node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 16.x
           cache: "pnpm"
 
-      - run: pnpm install --frozen-lockfile
+      - name: Install lockfile
+        run: pnpm install --frozen-lockfile
+
       - name: Create Release Pull Request or Publish
         id: changesets
         uses: changesets/action@v1
