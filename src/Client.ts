@@ -17,7 +17,6 @@ export default class Client {
   }
 
   // rate limit method
-  //:Promise<Boolean>
   public async rateLimit(
     RateLimitOptions?: RateLimitConfigOptions,
   ): Promise<boolean> {
@@ -33,7 +32,6 @@ export default class Client {
       }
     }
     headers.append("X-Api-Key", this.#apiKey);
-    console.log("API KEY: ", this.#apiKey);
     headers.append("Content-Type", "application/json");
 
     // TODO: update URL
