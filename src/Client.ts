@@ -1,3 +1,5 @@
+import { StratusError } from "./error";
+
 export interface Config {
   apiKey: string;
 }
@@ -15,7 +17,10 @@ export default class Client {
   }
 
   // rate limit method
-  public async rateLimit(RateLimitOptions?: RateLimitConfigOptions) {
+  //:Promise<Boolean>
+  public async rateLimit(
+    RateLimitOptions?: RateLimitConfigOptions,
+  ): Promise<boolean> {
     const headers = new Headers();
 
     // optional Rate Limit config
@@ -28,21 +33,28 @@ export default class Client {
       }
     }
     headers.append("X-Api-Key", this.#apiKey);
+    console.log("API KEY: ", this.#apiKey);
     headers.append("Content-Type", "application/json");
 
+    // TODO: update URL
     const response = await fetch("http://127.0.0.1:3000/api/v1/ratelimit", {
       method: "post",
       headers: headers,
     });
-    const data = await response.json();
-    console.log(data);
+    // 200 - successful
+    if (response.ok) {
+      return false;
+    }
+    // 429 - successful, but rate lmited
+    if (response.status == 429) {
+      return true;
+    }
+
+    // errors
+    const cause = await response.text();
+    throw new StratusError({
+      code: response.status,
+      cause: cause,
+    });
   }
 }
-
-const client = new Client({
-  apiKey: "your-api-key",
-});
-
-console.log(client);
-// testing stuff...
-client.rateLimit();
