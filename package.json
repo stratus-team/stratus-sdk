@@ -3,6 +3,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc --target es6",
+    "lint": "tsc",
     "clean": "tsc --build --clean",
     "test": "jest test/"
   },
@@ -13,6 +14,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@changesets/cli": "^2.27.1",
     "node-fetch": "^2.7.0"
   },
   "description": "Typescript SDK for Stratus",
