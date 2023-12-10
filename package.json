@@ -20,7 +20,7 @@
     "node-fetch": "^2.7.0"
   },
   "description": "Typescript SDK for Stratus",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "./build/src",
   "types": "./build/src/index.d.ts",
   "directories": {
