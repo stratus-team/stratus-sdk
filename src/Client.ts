@@ -18,7 +18,7 @@ export default class Client {
 
   // rate limit method
   public async rateLimit(
-    RateLimitOptions?: RateLimitConfigOptions,
+    RateLimitOptions?: RateLimitConfigOptions
   ): Promise<boolean> {
     const headers = new Headers();
 
@@ -34,11 +34,13 @@ export default class Client {
     headers.append("X-Api-Key", this.#apiKey);
     headers.append("Content-Type", "application/json");
 
-    // TODO: update URL
-    const response = await fetch("http://127.0.0.1:3000/api/v1/ratelimit", {
-      method: "post",
-      headers: headers,
-    });
+    const response = await fetch(
+      "https://go-rate-limit-api.onrender.com/api/v1/ratelimit",
+      {
+        method: "post",
+        headers: headers,
+      }
+    );
     // 200 - successful
     if (response.ok) {
       return false;
