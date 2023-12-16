@@ -42,12 +42,10 @@ export default class Client {
     headers.append("X-Api-Key", this.#apiKey);
     headers.append("Content-Type", "application/json");
 
-    console.log("URL: ", this.#apiURL);
     const response = await fetch(this.#apiURL, {
       method: "post",
       headers: headers,
     });
-    console.log("RESPONSE: ", response);
     // 200 - successful
     if (response.ok) {
       return false;
