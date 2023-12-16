@@ -2,6 +2,7 @@ import { StratusError } from "./error";
 
 export interface Config {
   apiKey: string;
+  apiURL: string; // need this for now to prevent frequent changes
 }
 
 export interface RateLimitConfigOptions {
@@ -11,12 +12,19 @@ export interface RateLimitConfigOptions {
 
 export default class Client {
   #apiKey: string;
+  #apiURL: string;
 
   constructor(config: Config) {
     this.#apiKey = config.apiKey;
+    this.#apiURL = config.apiURL;
   }
 
-  // rate limit method
+  /**
+   * Rate limit method
+   * @param RateLimitOptions Optional configuration options for rate limiting.
+   * @returns Promise resolves to a boolean, true if rate limited & false if not rate limited
+   *
+   */
   public async rateLimit(
     RateLimitOptions?: RateLimitConfigOptions
   ): Promise<boolean> {
@@ -34,13 +42,12 @@ export default class Client {
     headers.append("X-Api-Key", this.#apiKey);
     headers.append("Content-Type", "application/json");
 
-    const response = await fetch(
-      "https://go-rate-limit-api.onrender.com/api/v1/ratelimit",
-      {
-        method: "post",
-        headers: headers,
-      }
-    );
+    console.log("URL: ", this.#apiURL);
+    const response = await fetch(this.#apiURL, {
+      method: "post",
+      headers: headers,
+    });
+    console.log("RESPONSE: ", response);
     // 200 - successful
     if (response.ok) {
       return false;

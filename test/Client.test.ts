@@ -1,7 +1,8 @@
 import Client from "../src/Client";
 
 describe("Stratus SDK Client", () => {
+  // TODO: Checks for apiURL
   test("Constructs without throwing", () => {
-    new Client({ apiKey: "invalid" });
+    const client = new Client({ apiKey: "invalid", apiURL: "invalid" });
   });
 });
