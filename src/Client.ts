@@ -1,12 +1,30 @@
 import { StratusError } from "./error";
 
+/**
+ * Configuration interface for API settings.
+ * @interface Config
+ * @property {string} apiKey - The API key for authentication.
+ * @property {string} apiURL - The base URL of the API.
+ */
 export interface Config {
   apiKey: string;
-  apiURL: string; // need this for now to prevent frequent changes
+  apiURL: string; // need this for now to prevent frequent changeset updates.
 }
 
+/**
+ * RateLimitConfigOptions interface defines the configuration options for rate limiting.
+ */
 export interface RateLimitConfigOptions {
+  /**
+   * The maximum number of requests allowed within a specified window of time.
+   * Default: 5 requests per second if not specified.
+   */
   limit?: number;
+
+  /**
+   * The length of the time window in seconds during which the requests are counted.
+   * Default: 1 second if not specified.
+   */
   window?: number;
 }
 
@@ -14,6 +32,10 @@ export default class Client {
   #apiKey: string;
   #apiURL: string;
 
+  /**
+   * @constructor
+   * @param {Config} Config interface requires apiKey and apiUrl.
+   */
   constructor(config: Config) {
     this.#apiKey = config.apiKey;
     this.#apiURL = config.apiURL;
@@ -22,7 +44,7 @@ export default class Client {
   /**
    * Rate limit method
    * @param RateLimitOptions Optional configuration options for rate limiting.
-   * @returns Promise resolves to a boolean, true if rate limited & false if not rate limited
+   * @returns {Promise<boolean>} Promise resolves to a boolean, true if rate limited & false if not rate limited
    *
    */
   public async rateLimit(
